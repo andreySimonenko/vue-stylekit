@@ -4,24 +4,27 @@ const config = require('../config')
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
 }
+console.info('process.env.NODE_ENV',process.env.NODE_ENV);
 
 const opn = require('opn');
 const path = require('path');
 const express = require('express');
 const webpack = require('webpack');
 const proxyMiddleware = require('http-proxy-middleware');
-const webpackConfig = require('../../webpack.config');
+const webpackConfig = require('../webpack/webpack.dev.config');
+const webpackConfigProd = require('../webpack.build.config');
 const Ora = require('ora');
 
 const port = process.env.PORT || config.dev.port;
 
 const proxyTable = config.dev.proxyTable;
 
-const app = express()
+const app = express();
 const compiler = webpack(webpackConfig);
+
 console.info('webpackConfig.output.publicPath',webpackConfig.output.publicPath);
+
 const devMiddleware = require('webpack-dev-middleware')(compiler, {
-  // publicPath: webpackConfig.output.publicPath,
   path: '/__webpack_hmr',
   quiet: true,
   stats: {
@@ -70,7 +73,7 @@ Object.keys(proxyTable).forEach(function (context) {
   app.use(proxyMiddleware(options.filter || context, options))
 })
 
-app.use(require('connect-history-api-fallback')())
+app.use(require('connect-history-api-fallback')());
 
 app.use(devMiddleware)
 

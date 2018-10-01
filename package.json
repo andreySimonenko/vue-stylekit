@@ -1,8 +1,10 @@
 {
-  "name": "vue_stylekit",
-  "version": "0.0.2",
+  "name": "vue_rt_style",
+  "version": "0.0.3",
   "description": "",
-  "main": "index.js",
+  "main": "dist/vue_rt_style.js",
+  "module": "dist/vue_rt_style.js",
+  "unpkg": "dist/vue_rt_style.js",
   "scripts": {
     "start": "node build/local/index.js",
     "build": "cross-env NODE_ENV=production webpack",

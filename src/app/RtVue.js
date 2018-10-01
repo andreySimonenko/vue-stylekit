@@ -1,6 +1,7 @@
 import Vue from 'vue';
-import stylesReset from './dist/css/reset/index.styl';
+import stylesReset from './dist/css/reset/index.less';
 import styles from './dist/css/styles.less';
+
 import {
   Button,
   ButtonRippleWithoutJs,
@@ -37,14 +38,8 @@ import {
   BannerPaginatorItem
 } from './dist/components/experimental-elements';
 
-import {
-  PreComponent
-} from './dist/components/test-components';
-
-Vue.component(PreComponent.name, PreComponent);
 
 const RtVue = {
-
   install(Vue, config) {
     if (RtVue.installed) return;
     Vue.component(Button.name, Button);
